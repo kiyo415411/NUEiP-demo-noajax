@@ -1,0 +1,97 @@
+:root {
+    --primary-color: #0095d8;
+    --primary-deep-color: #444;
+    --gray-color: #eee;
+}
+
+table {
+    /* 防止溢出 */
+    overflow: hidden;
+}
+
+td,
+th {
+    position: relative;
+    outline: 0;
+}
+tbody tr:hover {
+    background-color: var(--gray-color);
+}
+td:hover::after,
+thead th:not(:empty):hover::after,
+td:focus::after,
+thead th:not(:empty):focus::after {
+    content: '';
+    height: 10000px;
+    left: 0;
+    position: absolute;
+    top: -5000px;
+    width: 100%;
+    z-index: -1;
+}
+td:hover::after,
+th:hover::after {
+    background-color: var(--gray-color);
+}
+
+.btn {
+    background-color: var(--primary-color);
+    border: 0.1rem solid var(--primary-color);
+    border-radius: 50rem;
+    font-weight: 700;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.btn:hover {
+    background-color: white;
+    color: var(--primary-color);
+    border: 0.1rem solid var(--primary-color);
+}
+
+.btn:active {
+    background-color: white;
+    color: var(--primary-color);
+    border: 0.1rem solid var(--primary-color);
+}
+
+.bi-pencil-square {
+    color: var(--primary-deep-color);
+}
+
+.bi-pencil-square:hover {
+    color: var(--primary-color);
+}
+
+.bi-trash-fill {
+    color: var(--primary-deep-color);
+}
+
+.bi-trash-fill:hover {
+    color: var(--primary-color);
+}
+
+.bi-person-plus {
+    color: var(--primary-deep-color);
+}
+
+.bi-person-plus:hover {
+    color: var(--primary-color);
+}
+
+.bi-search {
+    color: var(--primary-deep-color);
+}
+
+.bi-search:hover {
+    color: var(--primary-color);
+}
+
+table .row:hover {
+    background: var(--gray-color);
+    transition: 250ms;
+}
+
+h2 {
+    color: #444;
+}

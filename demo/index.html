@@ -1,141 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="description" content="Hello World">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
-
-
-<title>個人資料表</title>
-</head>
-<body>
-  <div>
-    <h1>
-      <span>個人資料表</span>
-    </h1>
-  </div>
-
-  <br />
-
-  <div class="button">
-    <button id="addbutton" style="font-size: 20px; font-weight: bold;">
-      新增 <span class="glyphicon glyphicon-plus"></span>
-    </button>
-    <button id="searchbutton" style="font-size: 20px; font-weight: bold;">
-      搜尋 <span class="glyphicon glyphicon-search"></span>
-    </button>
-  </div>
-
-  <br />
-
-  <div class="table">
-    <table id="cardtable" style='width: 500px' cellpadding='0' cellspacing='0' border='2' bordercolor='black'
-      class='table table-striped'>
-      <thead>
-        <tr>
-          <th>中文名字</th>
-          <th>英文名字</th>
-          <th>性別</th>
-          <th>修改</th>
-          <th>刪除</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <!--新增表單-->
-  <div id="dialog-addconfirm" title="新增表單" style="display: none">
-    <form method="post" id="addform">
-      <!-- 中文姓名 -->
-      <div class="formcnname">
-        <div class="form-group">
-          <label for="element-1">中文姓名</label> <input name="cnname" style="width: 100px" type="text" id="addcnname"
-            class="form-control">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Hello World" />
+        <link
+            rel="stylesheet"
+            href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+        />
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://jqueryui.com/resources/demos/style.css"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
+            integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+            integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="./style.css" />
+        <title>個人資料表</title>
+    </head>
+    <body class="container justify-content-center text-center mt-5">
+        <!-- 個人資料表 + 新增 + 搜尋 -->
+        <div
+            class="title-tool d-flex justify-content-between mb-4 px-5 align-items-center pb-2"
+        >
+            <h2 class="fw-bold text-start m-0">▌ 個人資料表</h2>
+            <div class="add-search-group d-flex gap-3 align-items-center">
+                <!--新增表單-->
+                <!-- Button trigger modal -->
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                    class="bi bi-person-plus"
+                    viewBox="0 0 16 16"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                >
+                    <path
+                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
+                    />
+                </svg>
+                <!-- Modal -->
+                <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    新增表單
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <form
+                                method="post"
+                                id="addform"
+                                class="text-start p-3 needs-validation"
+                                novalidate
+                            >
+                                <div class="modal-body d-grid gap-3">
+                                    <!-- 中文姓名 -->
+                                    <div class="formcnname">
+                                        <div class="form-group d-grid gap-1">
+                                            <label for="element-1"
+                                                >中文姓名</label
+                                            >
+                                            <input
+                                                name="cnname"
+                                                type="text"
+                                                id="addcnname"
+                                                class="form-control"
+                                                required
+                                            />
+                                            <div class="invalid-feedback">
+                                                請輸入中文姓名
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 英文姓名 -->
+                                    <div class="formenname">
+                                        <div class="form-group">
+                                            <label for="element-1"
+                                                >英文姓名</label
+                                            >
+                                            <input
+                                                name="enname"
+                                                type="text"
+                                                id="addenname"
+                                                class="form-control"
+                                                required
+                                            />
+                                            <div class="invalid-feedback">
+                                                請輸入英文姓名
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 電話號碼 -->
+                                    <div class="formenname">
+                                        <div class="form-group">
+                                            <label for="element-1"
+                                                >電話號碼</label
+                                            >
+                                            <input
+                                                name="phone"
+                                                type="tel"
+                                                pattern="^(09)[0-9]{8}$"
+                                                id="addphone"
+                                                class="form-control"
+                                                required
+                                            />
+                                            <div class="invalid-feedback">
+                                                請輸入有效的電話號碼格式
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 電子郵件 -->
+                                    <div class="formenname">
+                                        <div class="form-group">
+                                            <label for="element-1"
+                                                >電子郵件</label
+                                            >
+                                            <input
+                                                name="email"
+                                                type="email"
+                                                id="addemail"
+                                                class="form-control"
+                                                required
+                                            />
+                                            <div class="invalid-feedback">
+                                                請輸入有效的電子郵件格式
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 性別 -->
+                                    <div class="formsex">
+                                        <label for="element-1">性別</label>
+                                        <div class="form-group d-flex gap-5">
+                                            <label
+                                                ><input
+                                                    type="radio"
+                                                    name="addsex"
+                                                    value="man"
+                                                    class="radio"
+                                                    checked="checked"
+                                                />男</label
+                                            >
+                                            <label
+                                                ><input
+                                                    type="radio"
+                                                    name="addsex"
+                                                    value="woman"
+                                                    class="radio"
+                                                />女</label
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        取消
+                                    </button>
+                                    <button
+                                        type="reset"
+                                        class="btn btn-secondary"
+                                    >
+                                        重新填寫
+                                    </button>
+                                    <button
+                                        id="addconfirm"
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        新增
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 搜尋表單-->
+                <!-- Button trigger modal -->
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="21"
+                    height="21"
+                    fill="currentColor"
+                    class="bi bi-search"
+                    viewBox="0 0 16 16"
+                    id="searchbutton"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#searchModal"
+                >
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                    />
+                </svg>
+                <!-- Modal -->
+                <div
+                    class="modal fade"
+                    id="searchModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    搜尋表單
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <form
+                                method="post"
+                                id="searchform"
+                                class="text-start p-3"
+                                novalidate
+                            >
+                                <div class="modal-body d-grid gap-3">
+                                    <!-- 中文姓名 -->
+                                    <div class="formcnname">
+                                        <div class="form-group d-grid gap-1">
+                                            <label for="element-1"
+                                                >中文姓名</label
+                                            >
+                                            <input
+                                                name="cnname"
+                                                type="text"
+                                                id="secnname"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <!-- 英文姓名 -->
+                                    <div class="formenname">
+                                        <div class="form-group">
+                                            <label for="element-1"
+                                                >英文姓名</label
+                                            >
+                                            <input
+                                                name="enname"
+                                                type="text"
+                                                id="seenname"
+                                                class="form-control"
+                                            />
+                                        </div>
+                                    </div>
+                                    <!-- 電話號碼 -->
+                                    <div class="formenname">
+                                        <div class="form-group">
+                                            <label for="element-1"
+                                                >電話號碼</label
+                                            >
+                                            <input
+                                                name="phone"
+                                                type="text"
+                                                id="sephone"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <!-- 電子郵件 -->
+                                    <div class="formenname">
+                                        <div class="form-group">
+                                            <label for="element-1"
+                                                >電子郵件</label
+                                            >
+                                            <input
+                                                name="email"
+                                                type="email"
+                                                id="seemail"
+                                                class="form-control"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <!-- 性別 -->
+                                    <div class="formsex">
+                                        <label for="element-1">性別</label>
+                                        <div class="form-group d-flex gap-5">
+                                            <label
+                                                ><input
+                                                    type="radio"
+                                                    name="sesex"
+                                                    value="man"
+                                                    class="radio"
+                                                    checked="checked"
+                                                />男</label
+                                            >
+                                            <label
+                                                ><input
+                                                    type="radio"
+                                                    name="sesex"
+                                                    value="woman"
+                                                    class="radio"
+                                                />女</label
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        取消
+                                    </button>
+                                    <button
+                                        type="reset"
+                                        class="btn btn-secondary"
+                                    >
+                                        重新填寫
+                                    </button>
+                                    <button
+                                        id="searchconfirm"
+                                        type="button"
+                                        class="btn btn-primary"
+                                    >
+                                        搜尋
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <!-- 英文姓名 -->
-      <div class="formenname">
-        <div class="form-group">
-          <label for="element-1">英文姓名</label> <input name="enname" style="width: 100px" type="text" id="addenname"
-            class="form-control">
+        <div class="cardtable-box shadow px-2 px-sm-4 py-3 row mx-1">
+            <table id="cardtable" class="table">
+                <thead>
+                    <tr>
+                        <th>中文名字</th>
+                        <th>英文名字</th>
+                        <th>手機</th>
+                        <th>電子信箱</th>
+                        <th>性別</th>
+                        <th>修改</th>
+                        <th>刪除</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
-      </div>
-      <!-- 性別 -->
-      <div class="formsex">
-        <label for="element-1">性別</label>
-        <div class="form-group">
-          <label><input type="radio" name="addsex" value="man" class="radio" checked="checked">男</label> <label><input
-            type="radio" name="addsex" value="woman" class="radio">女</label>
-        </div>
-      </div>
-      <!-- 確認送出 -->
-    </form>
-  </div>
 
-  <!--搜尋表單-->
-  <div id="dialog-searchconfirm" title="搜尋表單" style="display: none">
-    <form method="post" id="searchform">
-      <!-- 中文姓名 -->
-      <div class="formcnname">
-        <div class="form-group">
-          <label for="element-1">中文姓名</label> <input name="cnname" style="width: 100px" type="text" id="secnname"
-            class="form-control">
-        </div>
-      </div>
-      <!-- 英文姓名 -->
-      <div class="formenname">
-        <div class="form-group">
-          <label for="element-1">英文姓名</label> <input name="enname" style="width: 100px" type="text" id="seenname"
-            class="form-control">
-        </div>
-      </div>
-      <!-- 性別 -->
-      <div class="formsex">
-        <label for="element-1">性別</label>
-        <div class="form-group">
-          <label><input type="radio" name="sesex" value="man" class="seradio">男</label> <label><input
-            type="radio" name="sesex" value="woman" class="seradio">女</label>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <!--修改表單-->
-  <div id="dialog-modifyconfirm" title="修改表單" style="display: none">
-    <form method="post" id="modifyform">
-      <!-- 中文姓名 -->
-      <div class="formcnname">
-        <div class="form-group">
-          <label for="element-1">中文姓名</label> <input name="cnname" style="width: 100px" type="text" id="mocnname"
-            class="form-control">
-        </div>
-      </div>
-      <!-- 英文姓名 -->
-      <div class="formenname">
-        <div class="form-group">
-          <label for="element-1">英文姓名</label> <input name="enname" style="width: 100px" type="text" id="moenname"
-            class="form-control">
-        </div>
-      </div>
-      <!-- 性別 -->
-      <div class="formsex">
-        <label for="element-1">性別</label>
-        <div class="sex-group">
-          <label><input type="radio" name="mosex" value="man" class="radio" id="modifyman">男</label> <label><input
-            type="radio" name="mosex" value="woman" class="radio" id="modifywoman">女</label>
-        </div>
-      </div>
-
-      <div class="formsid" style="display: none">
-        <input name="sid" id="modifysid">
-      </div>
-      <!-- 確認送出 -->
-    </form>
-  </div>
-  <script src="demo.js"></script>
-</body>
+        <script src="demo.js"></script>
+    </body>
 </html>

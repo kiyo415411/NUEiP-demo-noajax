@@ -77,7 +77,7 @@ $(document).ready(function () {
 });
 
 // 修改鈕
-$('#cardtable').on('click', '.modifybutton', function () {
+$('#cardtable').on('click', '.modifybutton', function (e) {
     var url = 'ajax/ajaxCard';
     var ajaxobj = new AjaxObject(url, 'json');
     ajaxobj.modify_get();
@@ -372,13 +372,13 @@ function initEdit(response) {
                 function (event) {
                     if (!form.checkValidity()) {
                         event.preventDefault();
+                        // 阻止事件繼續冒泡
                         event.stopPropagation();
                     } else {
                         ajaxobj.modify();
                         event.preventDefault();
-                        $('#modifyModal').modal('toggle');
+                        $('.modal-backdrop').remove();
                     }
-
                     form.classList.add('was-validated');
                 },
                 false
@@ -405,9 +405,7 @@ AjaxObject.prototype.phone = '';
 AjaxObject.prototype.email = '';
 AjaxObject.prototype.sex = '';
 AjaxObject.prototype.id = 0;
-AjaxObject.prototype.alertt = function () {
-    alert('Alert:');
-};
+
 AjaxObject.prototype.getall = function () {
     response =
         '[{"s_sn":"35","cnname":"邱小甘","enname":"Peter","phone":"0912345678","email":"peter35@gmail.com","sex":"0"},{"s_sn":"49","cnname":"蔡凡昕","enname":"Allen","phone":"0912345678","email":"peter35@gmail.com","sex":"0"},{"s_sn":"50","cnname":"趙雪瑜","enname":"Sharon","phone":"0912345678","email":"peter35@gmail.com","sex":"0"},{"s_sn":"51","cnname":"賴佳蓉","enname":"Yoki","phone":"0912345678","email":"peter35@gmail.com","sex":"1"}]';
